@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BACKEND</title>
+
+    
+</head>
+<body>
+  
+
+      <form id="investors">
+          <input id="image" placeholder="enter investor img_url"/>
+          <input id="name" placeholder="enter investor name"/>
+          <input id="position" placeholder="enter investor position"/>
+          <input id="logo" placeholder="enter investor logo_url"/>
+
+          <input type="submit" value="submit"/>
+      </form>
+    
+
+</body>
+</html>
+
+<script>
+    document.querySelector("#investors").addEventListener("submit",myfunction);
+    var investorArr= JSON.parse(localStorage.getItem("investorData")) || [];
+    function myfunction(){
+        event.preventDefault();
+
+        var investorObj={
+            avatar:investors.image.value,
+            investorName:investors.name.value,
+            investorPosition:investors.position.value,
+            investorsCompanyLogo:investors.logo.value
+        };
+
+        investorArr.push(investorObj);
+        // console.log(investorArr);
+       localStorage.setItem("investorData",JSON.stringify(investorArr));
+            
+    }
+
+
+
+
+</script>

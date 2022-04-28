@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRONTEND</title>
+</head>
+<style>
+ #container{
+    width: 80%;
+    height: auto;
+    /* border: 1px red solid; */
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4,23%);
+    grid-template-rows: repeat(5,auto);
+    gap: 10px 30px;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+#container>div{
+    /* border: 1px black solid; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    border-radius: 10px;
+}
+img{
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+p{
+    color: gray;
+}
+p+img{
+    height: 50px;
+    margin: auto;
+    width: 50%;
+}
+</style>
+<body>
+</body>
+</html>
+<script>
+
+    var investorArr=JSON.parse(localStorage.getItem("investorData"));
+    console.log(investorArr);
+
+    var box=document.createElement("div");
+    box.setAttribute("id","container");
+    document.querySelector("body").append(box);
+
+
+investorArr.forEach(function(elem){
+  var card=document.createElement("div");
+  document.querySelector("#container").append(card);
+  var investor_image=document.createElement("img");
+  investor_image.setAttribute("src",elem.avatar);
+  card.append(investor_image);
+  var investor_name=document.createElement("h3");
+  investor_name.innerText=elem.investorName;
+  card.append(investor_name);
+  var investor_position=document.createElement("p");
+  investor_position.innerText=elem.investorPosition;
+  card.append(investor_position);
+  var company_logo=document.createElement("img");
+  company_logo.setAttribute("src",elem.investorsCompanyLogo);
+  card.append(company_logo);
+
+})
+</script>
