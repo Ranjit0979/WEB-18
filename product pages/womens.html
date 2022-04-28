@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Womens Page</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+
+var product_arr=JSON.parse(localStorage.getItem("women_product_info"));
+// console.log(product_arr);
+
+var container=document.createElement("div");
+        container.setAttribute("id","container");
+
+    product_arr.map(function (ele){
+    
+
+        var box=document.createElement("div");
+        box.setAttribute("class","card");
+
+        var product_image=document.createElement("img");
+        product_image.setAttribute("src",ele.image);
+
+        var product_name=document.createElement("h3");
+        product_name.innerText=ele.name;
+
+        var product_price=document.createElement("div");
+        product_price.innerText=ele.price;
+
+        var product_strikedOffPrice=document.createElement("div");
+        product_strikedOffPrice.innerText=ele.strikedoffprice;
+        product_strikedOffPrice.style.textDecoration="line-through";
+
+        var btn=document.createElement("button");
+        btn.innerText="Add To Cart";
+
+        box.append(product_image,product_name,product_price,product_strikedOffPrice,btn);
+
+        container.append(box);
+        document.querySelector("body").append(container);
+
+
+
+    })
+
+</script>

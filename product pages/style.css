@@ -1,0 +1,36 @@
+#navbar{
+    display: flex;
+    background-color: rgb(52, 97, 180);
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+}
+
+#navbar>div>a{
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+}
+
+
+#container{
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* border: 1px red solid; */
+}
+
+.card{
+    width: 22%;
+    height: auto;
+    /* border: 1px black solid; */
+    margin-top: 2%;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.card>img{
+    width: 100%;
+}
