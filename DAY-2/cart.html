@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Cart page</h1>
+    <form id="promo">
+      <input id="promocode" placeholder="enter promo code" />
+      <button id="submit">submit</button>
+    </form>
+  </body>
+</html>
+<script>
+  var product_data = JSON.parse(localStorage.getItem("cart_product")) || [];
+
+  var total_cart = document.createElement("h2");
+  if (product_data != null) {
+    total_cart.innerText = "Total Cart Items=" + product_data.length;
+  } else {
+    total_cart.innerText = "Total Cart Items=" + 0;
+  }
+  total_cart.style.textAlign = "right";
+
+  var total_price = document.createElement("h2");
+  var sum = product_data.reduce(function (acc, ele) {
+    return acc + Number(ele.price) * ele.quantity;
+  }, 0);
+
+  total_price.innerText = "Total Cart Price=" + sum;
+
+  total_price.style.textAlign = "right";
+
+  document.querySelector("#submit").addEventListener("click", function () {
+    event.preventDefault();
+    var total = discount(sum);
+    total_price.innerText = "Total Cart Price=" + total;
+  });
+
+  document.querySelector("body").append(total_cart, total_price);
+
+  var container = document.createElement("div");
+  container.setAttribute("id", "container");
+
+  display(product_data);
+
+  function display(product_arr) {
+    var count = 1;
+    product_arr.map(function (ele, index) {
+      var box = document.createElement("div");
+      box.setAttribute("class", "card");
+
+      var product_image = document.createElement("img");
+      product_image.setAttribute("src", ele.image);
+
+      var product_name = document.createElement("h3");
+      product_name.innerText = ele.name;
+
+      var product_price = document.createElement("div");
+      product_price.innerText = ele.price;
+
+      var product_strikedOffPrice = document.createElement("div");
+      product_strikedOffPrice.innerText = ele.strikedoffprice;
+      product_strikedOffPrice.style.textDecoration = "line-through";
+
+      var btn = document.createElement("button");
+      btn.innerText = "Delete";
+      btn.style.margin = "10px 10px 5px 5px";
+      btn.addEventListener("click", function () {
+        delete_item(ele, index);
+      });
+
+      var btn2 = document.createElement("button");
+
+      btn2.addEventListener("click", function () {
+        increment(ele);
+      });
+      btn2.innerText = "+";
+
+      var quant = document.createElement("span");
+
+      var btn3 = document.createElement("button");
+
+      btn3.addEventListener("click", function () {
+        decrement(ele, index);
+      });
+      btn3.innerText = "-";
+
+      quant.innerText = ele.quantity;
+      quant.style.margin = "5px";
+
+      box.append(
+        product_image,
+        product_name,
+        product_price,
+        product_strikedOffPrice,
+        btn,
+        btn2,
+        quant,
+        btn3
+      );
+
+      container.append(box);
+      document.querySelector("body").append(container);
+    });
+  }
+
+  function delete_item(ele, index) {
+    // console.log(ele);
+    product_data.splice(index, 1);
+    localStorage.setItem("cart_product", JSON.stringify(product_data));
+
+    window.location.reload();
+  }
+
+  function increment(ele, index) {
+    ele.quantity++;
+    localStorage.setItem("cart_product", JSON.stringify(product_data));
+    window.location.reload();
+  }
+
+  function decrement(ele, index) {
+    ele.quantity--;
+    if (ele.quantity == 0) {
+      delete_item(ele, index);
+    }
+    localStorage.setItem("cart_product", JSON.stringify(product_data));
+    window.location.reload();
+  }
+
+  function discount(sum) {
+    var promo = document.querySelector("#promocode").value;
+    if (promo == "masai30") {
+      var total = sum;
+      sum = (30 / 100) * sum;
+      total = total - sum;
+      return total;
+    } else {
+      alert("wrong promo code");
+      return sum;
+    }
+  }
+</script>

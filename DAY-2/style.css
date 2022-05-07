@@ -1,12 +1,32 @@
 #navbar{
-    display: flex;
+    display: grid;
+    grid-template-columns: 20% 50%;
     background-color: rgb(52, 97, 180);
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     height: 60px;
+    border-radius: 20px;
 }
 
-#navbar>div>a{
+#navbar>div:first-child{
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    margin-left: 4%;
+}
+
+#navbar>div+div{
+ text-align: right;
+ margin-right: 4%;
+}
+
+#navbar>div{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    justify-content: space-between;
+}
+
+#navbar a{
     text-decoration: none;
     color: white;
     font-size: 24px;
@@ -34,3 +54,47 @@
 .card>img{
     width: 100%;
 }
+
+#promo{
+    margin: auto;
+    display: flex;
+    height: 60px;
+    width: 50%;
+}
+
+#heading{
+    text-align: center;
+    font-size: 30px;
+}
+
+#input_container{
+    margin: auto;
+    height: 400px;
+    /* border: 1px red solid; */
+    width: 50%;
+    display: flex;
+    justify-content: center;
+
+}
+#input>input{
+    margin-bottom: 20px;
+    margin-top: 5px;
+    height: 10%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 0px;
+    font-size: 15px;
+    width: 400px;
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+#input>button{
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 30px;
+}
+
+
+

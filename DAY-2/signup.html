@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 id="heading">Sign Up</h1>
+    <div id="input_container">
+      <form id="input">
+        <label for="">Email :</label>
+        <br />
+        <input id="email" placeholder="enter yor email" />
+        <br />
+
+        <label for="">mobile number :</label>
+        <br />
+        <input id="mobile" placeholder="enter yor mobile number" />
+        <br />
+
+        <label for="">Password :</label>
+        <br />
+        <input id="password" placeholder="enter yor password" />
+        <br />
+        <button id="signup">SIGN UP</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+  var arr = JSON.parse(localStorage.getItem("signup_data")) || [];
+
+  document.querySelector("#signup").addEventListener("click", myfunction);
+
+  function myfunction() {
+    event.preventDefault();
+    var obj = {};
+    obj.email = document.querySelector("#email").value;
+
+    obj.mobile = document.querySelector("#mobile").value;
+
+    obj.password = document.querySelector("#password").value;
+
+    if (obj.email == "") {
+      alert("please enter email");
+    } else if (obj.password == "") {
+      alert("please enter password");
+    } else {
+      arr.push(obj);
+      alert("sigun up successful you can log in now");
+      window.location.href="login.html";
+    }
+    localStorage.setItem("signup_data", JSON.stringify(arr));
+
+  }
+ 
+</script>

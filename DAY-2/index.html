@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navbar</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-   <div id="navbar">
-    <div><a href="mens.html">Mens</a></div> 
-    <div><a href="womens.html">Womens</a></div> 
-   </div>
-</body>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="signup.html" />
+    <link rel="stylesheet" href="login.html">
+  </head>
+  <body>
+    <div id="navbar">
+      <div>Reebok</div>
+      <div>
+        <div><a href="mens.html">Mens</a></div>
+        <div><a href="womens.html">Womens</a></div>
+        <div><a href="login.html">Login</a></div>
+        <div><a href="signup.html">Signup</a></div>
+      </div>
+    </div>
+  </body>
 </html>
 <script>
-
-var mensData = [
+  var mensData = [
     {
       image_url:
         "https://content.shop4reebok.com/static/Product-EX4296/reebok_EX4296_1.jpg.plp",
@@ -271,7 +276,7 @@ var mensData = [
     },
   ];
 
-var womensData = [
+  var womensData = [
     {
       image_url:
         "https://content.shop4reebok.com/static/Product-GL2296/reebok_GL2296_1.jpg.plp",
@@ -730,48 +735,65 @@ var womensData = [
   ];
 
 
-var product_array=[];
-var women_product_array=[];
+  var abc=localStorage.getItem("login")||false;
+  var signup=localStorage.getItem("signup_data")||false;
+  if(abc==false)
+  {
+    if(signup==false)
+    {
+      window.location.href="signup.html"; 
+    }
+    else
+    {
+    window.location.href="login.html";
+    }
+  }
+  else
+  {
+    document.querySelector("#navbar>div+div>div:nth-child(3)>a").innerText="USER";
 
-mensData.map(function (ele){
+    document.querySelector("#navbar>div+div>div:last-child>a").innerText="CART";
+    document.querySelector("#navbar>div+div>div:last-child>a").href="cart.html";
+    
 
-    var product_obj={};
 
-    product_obj.image=ele.image_url;
+  }
+  var product_array = [];
+  var women_product_array = [];
 
-    product_obj.name=ele.name;
+  mensData.map(function (ele) {
+    var product_obj = {};
 
-    product_obj.price=ele.price;
+    product_obj.image = ele.image_url;
 
-    product_obj.strikedoffprice=ele.strikedoffprice;
+    product_obj.name = ele.name;
+
+    product_obj.price = ele.price;
+
+    product_obj.strikedoffprice = ele.strikedoffprice;
 
     product_array.push(product_obj);
 
-    localStorage.setItem("product_info",JSON.stringify(product_array));
+    localStorage.setItem("product_info", JSON.stringify(product_array));
+  });
 
+  womensData.map(function (ele) {
+    var product_obj = {};
 
+    product_obj.image = ele.image_url;
 
-})
+    product_obj.name = ele.name;
 
-womensData.map(function (ele){
+    product_obj.price = ele.price;
 
-var product_obj={};
+    product_obj.strikedoffprice = ele.strikedoffprice;
 
-product_obj.image=ele.image_url;
+    women_product_array.push(product_obj);
+    // console.log(women_product_array);
 
-product_obj.name=ele.name;
-
-product_obj.price=ele.price;
-
-product_obj.strikedoffprice=ele.strikedoffprice;
-
-women_product_array.push(product_obj);
-// console.log(women_product_array);
-
-localStorage.setItem("women_product_info",JSON.stringify(women_product_array));
-
-
-
-})
-
+    localStorage.setItem(
+      "women_product_info",
+      JSON.stringify(women_product_array)
+    );
+  });
 </script>
