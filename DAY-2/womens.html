@@ -9,6 +9,17 @@
   </head>
   <body>
     <h1>Women's Product</h1>
+    <select id="salarySort" onChange="sortByPrice()">
+      <option value="">Sort By Price</option>
+      <option value="LTH">Low to High</option>
+      <option value="HTL">High To Low</option>
+    </select>
+
+    <select id="nameSort" onChange="sortByNames()">
+      <option value="">Sort By name</option>
+      <option value="asc">Ascending</option>
+      <option value="dsc">Descending</option>
+    </select>
   </body>
 </html>
 <script>
@@ -76,5 +87,74 @@
       localStorage.setItem("cart_product", JSON.stringify(cart_arr));
       window.location.href = "cart.html";
     }
+  }
+
+
+  
+  function sortByPrice(){
+    var select=document.querySelector("#salarySort").value;
+    if(select=="")
+    {
+      window.location.reload();
+    }
+    else if(select=="LTH")
+    {
+      var filterArr=product_data.sort(function(a,b){
+        return (a.price-b.price);
+      });
+      document.querySelector("#container").innerHTML="";
+     display(filterArr);
+    }
+    else  if(select=="HTL")
+    {
+      var filterArr=product_data.sort(function(a,b){
+        return (b.price-a.price);
+      });
+      document.querySelector("#container").innerHTML="";
+     display(filterArr);
+    }
+
+    
+  }
+
+  
+  function sortByNames(){
+    var select=document.querySelector("#nameSort").value;
+    if(select=="")
+    {
+      window.location.reload();
+    }
+    else if(select=="asc")
+    {
+      var filterArr=product_data.sort(function(a,b){
+        if(a.name>b.name)
+        {
+          return 1;
+        }
+        if(a.name<b.name){
+          return -1;
+        }
+        return 0;
+      });
+      document.querySelector("#container").innerHTML="";
+     display(filterArr);
+    }
+    else if(select="dsc")
+    {
+      var filterArr=product_data.sort(function(a,b){
+        if(a.name>b.name)
+        {
+          return -1;
+        }
+        if(a.name<b.name){
+          return 1;
+        }
+        return 0;
+      });
+      document.querySelector("#container").innerHTML="";
+      display(filterArr);
+    }
+
+    
   }
 </script>
